@@ -1,0 +1,206 @@
+🔧 1. Core Concept: What is the System?
+A lending web application is a platform where:
+Users can apply for loans
+Admins (or automated logic) review and approve loans
+System tracks repayments, balances, interest, and history
+It can be used for:
+Microfinance
+Employee loans
+Peer-to-peer lending
+Small business lending
+School/organizational lending
+
+🧩 2. Key User Roles
+👤 Borrower (User)
+Register/login
+Apply for loans
+View loan status
+Repay loans
+View transaction history
+🧑‍💼 Admin / Loan Officer
+Approve/reject loan applications
+Set interest rates
+Track repayments
+Generate reports
+Manage users
+🤖 Optional: Automated Credit System
+Score users
+Auto-approve low-risk loans
+Flag risky borrowers
+
+🏗️ 3. Core Features (MVP)
+Start simple (Minimum Viable Product):
+✅ Authentication
+Sign up / Login
+Password recovery
+Role-based access (admin vs borrower)
+💰 Loan Management
+Create loan application: 
+Amount
+Term (months)
+Purpose
+Loan status: 
+Pending
+Approved
+Rejected
+Active / Paid
+📊 Dashboard
+User: 
+Active loans
+Remaining balance
+Payment schedule
+Admin: 
+Total loans
+Active borrowers
+Repayment performance
+💳 Repayment System
+Record payments
+Automatically calculate: 
+Remaining balance
+Interest
+Payment history log
+
+🧠 4. Business Logic (Important)
+🧮 Interest Calculation Models
+You can choose:
+Flat Rate
+Interest = Principal × Rate × Time
+Reducing Balance
+Interest decreases as balance decreases
+Amortization (recommended)
+Fixed monthly payments
+
+🔍 Loan Approval Logic
+Simple version:
+Manual admin approval
+Advanced:
+Based on: 
+Income
+Previous repayment behavior
+Loan history
+
+🗃️ 5. Database Design (Simplified)
+Users Table
+id
+name
+email
+password
+role (admin/user)
+created_at
+Loans Table
+id
+user_id
+amount
+interest_rate
+term_months
+status
+created_at
+Payments Table
+id
+loan_id
+amount
+payment_date
+Transactions (optional)
+id
+user_id
+type (loan/payment)
+amount
+date
+
+🖥️ 6. Suggested Tech Stack
+I will read the root `package.json` file to understand the overall configuration and scripts of the project.
+
+Viewed package.json:1-16
+
+I will list the files in the `backend` directory to confirm the backend structure.
+
+Listed directory backend
+
+I will read the backend `package.json` to verify the exact packages and frameworks running on the server side.
+
+Viewed package.json:1-18
+
+I will view the frontend `package.json` to verify the user-facing framework, UI components, icons library, and other frontend build tools.
+
+Viewed package.json:1-23
+
+I will check `server.js` and the `db` directory to see how the database connection is set up and if there are any specific hosted services (e.g. Supabase, Vercel Postgre, etc.) in use.
+
+Viewed server.js:1-66
+
+I will list files inside `backend/db` to see the database configuration setup.
+
+Listed directory db
+
+I will view `connection.js` to see how the connection pool to PostgreSQL is configured.
+
+Viewed connection.js:1-18
+
+The tech stack used in this project is a modern, high-performance web stack structured as follows:
+
+### 1. Frontend
+*   **Core Library:** **React** (v18.2.0) for building the user interface.
+*   **Build Tool &amp; Bundler:** **Vite** (v5.2.0) for fast Hot Module Replacement (HMR) and optimized production builds.
+*   **Styling:** **Vanilla CSS** with a robust custom design system (centralized HSL color variables, dynamic shadow/glow properties, hover states, and glassmorphism styling in `index.css`).
+*   **Icons:** **Lucide React** for modern vector icons.
+*   **Deployment Configuration:** Pre-configured for deployment via **Vercel** (`vercel.json`).
+
+### 2. Backend API
+*   **Web Server Framework:** **Fastify** (v4.26.2)—a high-performance, low-overhead Node.js web framework (modern alternative to Express).
+*   **Runtime Environment:** **Node.js** with ES6 modules enabled (`"type": "module"`).
+*   **Database Client:** **node-postgres (pg)** (v8.11.5) to manage PostgreSQL connection pooling, queries, and transactions.
+*   **Environment Configuration:** **dotenv** to manage configuration variables (like port, database URLs, and API endpoints).
+
+### 3. Database
+*   **Database Engine:** **PostgreSQL**. The database setup is designed to automatically negotiate SSL connections when hosting on cloud databases (e.g., Supabase, Railway, Neon) while disabling it for local development (`localhost`).✅ Authentication
+JWT (JSON Web Tokens)
+
+🔐 7. Security Considerations
+Very important for lending systems:
+Password hashing (bcrypt)
+Input validation
+Role-based permissions
+Secure payment handling
+HTTPS
+
+📈 8. Advanced Features (Phase 2)
+Once your MVP works:
+📱 Notifications
+Email/SMS reminders for due payments
+📊 Analytics
+Default rates
+Loan performance
+🤖 Credit Scoring
+Auto risk evaluation
+💳 Payment Gateway Integration
+GCash (popular in PH)
+PayMaya
+
+🎨 9. UI/UX Structure
+Typical pages:
+Login / Register
+Borrower Dashboard
+Apply Loan Page
+Loan Details Page
+Payment Page
+Admin Dashboard
+
+🧭 10. System Flow (Simple)
+User registers → Applies loan → Admin reviews →
+Loan approved → Funds issued →
+User makes payments → Loan completed
+
+✅ 11. MVP Development Plan
+Step-by-step:
+Build authentication system
+Create database schema
+Build loan application form
+Admin approval panel
+Payment tracking logic
+Dashboard UI
+
+💡 Pro Tips
+Keep the first version SIMPLE
+Focus on correct loan computation
+Log everything (transactions)
+Design for scalability
