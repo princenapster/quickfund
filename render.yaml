@@ -23,9 +23,8 @@ services:
           property: connectionString
 
   # 2. Frontend Static Site (React/Vite)
-  - type: web
+  - type: static
     name: quickfund-frontend
-    runtime: static
     rootDir: frontend
     buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: dist
