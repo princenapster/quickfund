@@ -13,9 +13,12 @@ let pgPool = null;
 // Initialize connection
 if (isPostgres) {
   console.log("Database: Using PostgreSQL");
+  const connectionString = process.env.DATABASE_URL;
+  const useSSL = process.env.NODE_ENV === 'production' || 
+                 (!connectionString.includes('localhost') && !connectionString.includes('127.0.0.1'));
   pgPool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    connectionString,
+    ssl: useSSL ? { rejectUnauthorized: false } : false
   });
 } else {
   console.log("Database: Using SQLite (lending.db)");
