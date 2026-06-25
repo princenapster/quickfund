@@ -5,7 +5,7 @@ services:
   # 1. Backend Web Service (Fastify API)
   - type: web
     name: quickfund-backend
-    env: node
+    runtime: node
     plan: free
     rootDir: backend
     buildCommand: npm install
@@ -23,11 +23,11 @@ services:
   # 2. Frontend Static Site (React/Vite)
   - type: web
     name: quickfund-frontend
-    env: static
+    runtime: static
     plan: free
     rootDir: frontend
     buildCommand: npm install --legacy-peer-deps && npm run build
-    publishDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://quickfund-backend.onrender.com
