@@ -24,7 +24,6 @@ services:
   - type: web
     name: quickfund-frontend
     runtime: static
-    plan: free
     rootDir: frontend
     buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: dist
