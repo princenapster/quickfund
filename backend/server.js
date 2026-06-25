@@ -69,6 +69,11 @@ function calculateLoanDetails(amount, rate, termMonths, type) {
   }
 }
 
+// Root Route / Health Check
+fastify.get('/', async (request, reply) => {
+  return { status: "ok", message: "LendSync Backend API is running successfully." };
+});
+
 // ---------------- AUTH ROUTES ----------------
 
 // Register
