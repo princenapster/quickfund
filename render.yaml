@@ -1,0 +1,42 @@
+# Render Blueprint Specification for LendSync (Lending Web App)
+# Learn more about Render Blueprints at https://render.com/docs/blueprints
+
+services:
+  # 1. Backend Web Service (Fastify API)
+  - type: web
+    name: quickfund-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true # Generates a secure random secret key automatically on Render
+      - key: DATABASE_URL
+        fromDatabase:
+          name: quickfund-db
+          property: connectionString
+
+  # 2. Frontend Static Site (React/Vite)
+  - type: web
+    name: quickfund-frontend
+    env: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://quickfund-backend.onrender.com
+        # NOTE: Since Render service names must be globally unique, if 'quickfund-backend' 
+        # is already taken by another user, Render will assign a suffix (e.g. quickfund-backend-xyz1).
+        # In that case, you should update this value to match your backend's actual public URL, 
+        # or change the name in this file before deploying.
+
+databases:
+  # 3. PostgreSQL Database (Free for 90 days, ideal for testing)
+  - name: quickfund-db
+    plan: free
